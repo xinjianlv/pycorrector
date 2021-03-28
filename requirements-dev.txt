@@ -1,11 +1,12 @@
 jieba==0.39
 pypinyin
 scikit-learn>=0.19.1
-torch>=1.3.1
+torch==1.7.1
 tqdm==4.50.2
 pytorch-ignite
 transformers==2.10.0
 tokenizers==0.9.4
+flask
 Unigram
 # fairseq>=0.9.0
 # tensorflow>=2.0.0 # tensorflow-gpu>=2.0.0

@@ -106,3 +106,5 @@ ENV/
 *gz
 my_test/data
 my_test/model_files
+
+*.out

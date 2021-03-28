@@ -4,3 +4,10 @@ nohup python main.py --lr 0.00002 --batch_size 8 --log_step 10 --train_precent 0
 
 nohup  python3.6 main.py --dataset_path ./my_test/data/nlpcc2018+hsk --lr 0.0001 --batch_size 8 --log_step 10 --n_epochs 10 > log_0324_1920.out &
 python3.6 main.py --dataset_path ./my_test/data/nlpcc2018+hsk/ --lr 0.0001 --batch_size 8 --log_step 10 --n_epochs 10
+
+
+
+
+ python3.6 main.py --dataset_path ./my_test/data/test --lr 0.0001 --batch_size 14 --log_step 10 --n_epochs 10 --base_model ./my_test/model_files/chinese_finetuned_lm
+
+nohup python3.6 main.py --dataset_path ./my_test/data/nlpcc2018+hsk --lr 0.00001 --batch_size 14 --log_step 10 --n_epochs 10 --base_model ./my_test/model_files/chinese_finetuned_lm > log.out &
