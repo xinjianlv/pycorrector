@@ -55,13 +55,13 @@ def train():
 
     if os.path.exists(cache_train) and os.path.exists(cache_valid):
         logger.info('load data loader form path: %s'% args.dataset_cache)
-        train_data_loader = pickle.load(open(cache_train,'r'))
-        valid_data_loader = pickle.load(open(cache_valid,'r'))
+        train_data_loader = pickle.load(open(cache_train,'rb'))
+        valid_data_loader = pickle.load(open(cache_valid,'rb'))
     else:
         logger.info('load data loader form resource file %s' % args.dataset_path)
         train_data_loader, valid_data_loader = BertTool.get_loaders(args.dataset_path,tokenizer,args.batch_size)
-        pickle.dump(train_data_loader,open(cache_train,'w'))
-        pickle.dump(valid_data_loader.open(cache_valid,'w'))
+        pickle.dump(train_data_loader, open(cache_train, 'wb'), protocol=4)
+        pickle.dump(valid_data_loader, open(cache_valid,'wb'), protocol=4)
 
     model = BertClassificationModel(cls=tokenizer.vocab_size,model_file=args.base_model)
 
@@ -108,7 +108,6 @@ def train():
             return loss.cpu().mean().item()
         return loss.cpu().item()
 
-        return loss.item()
 
     trainer = Engine(update)
 

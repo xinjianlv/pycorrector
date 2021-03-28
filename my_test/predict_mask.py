@@ -15,12 +15,12 @@ from transformers import pipeline
 MASK_TOKEN = "[MASK]"
 
 base_dir = './model_files/bert/'
-# base_dir2 = '~/.pycorrector/datasets/bert_models/chinese_finetuned_lm/'
+base_dir2 = '/Users/nocml/.pycorrector/datasets/bert_models/chinese_finetuned_lm'
 def main():
     parser = argparse.ArgumentParser()
 
     # Required parameters
-    parser.add_argument("--bert_model_dir", default='bert-base-chinese',
+    parser.add_argument("--bert_model_dir", default=base_dir2,
                         type=str,
                         help="Bert pre-trained model dir")
     args = parser.parse_args()
