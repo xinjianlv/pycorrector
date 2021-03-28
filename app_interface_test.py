@@ -12,7 +12,7 @@ urls = ('/', 'index')
 #表单
 InputForm = form.Form(
     # form.Textbox(input_id="foo",name="input_text",value='这是一个测试。'),
-    form.Textarea(name='input_sentences',value='疝気医院那好 为老人让坐，疝気专科百科问答\r\n少先队员因该为老人让坐\r\n少 先  队 员 因 该 为 老人让坐\r\n机七学习是人工智能领遇最能体现智能的一个分知\r\n到以深切的问候'),
+    form.Textarea(name='input_sentences',value='少先队员因该为老人让坐\r\n少 先  队 员 因 该 为 老人让坐\r\n机七学习是人工智能领遇最能体现智能的一个分知\r\n到以深切的问候'),
     # form.Textbox("bax",
     #     form.notnull,
     #     form.regexp('\d+', 'Must be a digit'),
