@@ -6,6 +6,7 @@ import pdb
 import torch
 from torch import nn
 from torch import optim
+from torch.nn import DataParallel
 from transformers import get_cosine_schedule_with_warmup,BertTokenizer
 
 from ignite.engine import Engine, Events
@@ -51,6 +52,8 @@ def train():
 
     model = BertClassificationModel(cls=tokenizer.vocab_size,model_file=args.base_model)
 
+
+
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
     criterion = nn.CrossEntropyLoss(ignore_index=0)
     steps = len(train_data_loader.dataset) // train_data_loader.batch_size
@@ -59,8 +62,18 @@ def train():
 
     lr_warmup = get_cosine_schedule_with_warmup(optimizer=optimizer, num_warmup_steps=1500, num_training_steps=steps*args.n_epochs)
 
-    model.to(device)
-    criterion.to(device)
+    if torch.cuda.device_count() > 1:
+        print("Let's use", torch.cuda.device_count(), "GPUs!")
+        gpu_num = torch.cuda.device_count()
+        gpu_list = [int(i) for i in range(gpu_num)]
+        model = DataParallel(model, device_ids=gpu_list)
+        multi_gpu = True
+
+    if torch.cuda.is_available():
+        model.cuda()
+
+    # model.to(device)
+    # criterion.to(device)
 
     def update(engine, batch):
         model.train()
@@ -80,6 +93,10 @@ def train():
 
         lr_warmup.step()
 
+        if multi_gpu:
+            return loss.cpu().mean().item()
+        return loss.cpu().item()
+
         return loss.item()
 
     trainer = Engine(update)
@@ -91,7 +108,12 @@ def train():
             attention_mask = batch[1].to(device)
             labels = batch[2].to(device)
             output = model(input_ids=input_ids, attention_mask=attention_mask)
-            return output.contiguous().view(-1, output.shape[1]).to(device), labels
+
+            predict = output.permute(1, 2, 0)
+            trg = labels.permute(1, 0)
+            # loss = criterion(predict.to(device), trg.to(device))
+
+            return predict, trg
 
     evaluator = Engine(inference)
     metrics = {"nll": Loss(criterion, output_transform=lambda x: (x[0], x[1])),
@@ -129,7 +151,7 @@ def train():
                         )
     '''================add check point========================'''
     checkpoint_handler = ModelCheckpoint(checkpoint_dir, 'checkpoint', n_saved=3)
-    trainer.add_event_handler(Events.EPOCH_COMPLETED, checkpoint_handler, {'mymodel': getattr(model, 'module', model),'base_bert':getattr(model.bert, 'module', model.bert)})  # "getattr" take care of distributed encapsulation
+    trainer.add_event_handler(Events.EPOCH_COMPLETED, checkpoint_handler, {'BertClassificationModel': getattr(model, 'module', model)})  # "getattr" take care of distributed encapsulation
 
     '''==============run trainer============================='''
     trainer.run(train_data_loader, max_epochs=args.n_epochs)
