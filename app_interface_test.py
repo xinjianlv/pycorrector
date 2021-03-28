@@ -2,7 +2,11 @@
 import web
 import pdb
 from web import form
+import logging
 
+
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s]-[%(threadName)s]-[%(filename)s:%(funcName)s:%(lineno)s]-%(levelname)s:  %(message)s' )
+logger = logging.getLogger()
 #模板
 render = web.template.render('templates/')
 
@@ -12,12 +16,12 @@ urls = ('/', 'index')
 #表单
 InputForm = form.Form(
     # form.Textbox(input_id="foo",name="input_text",value='这是一个测试。'),
-    form.Textarea(name='input_sentences',value='少先队员因该为老人让坐\r\n少 先  队 员 因 该 为 老人让坐\r\n机七学习是人工智能领遇最能体现智能的一个分知\r\n到以深切的问候'),
+    form.Textarea(name='input_sentences',value='少先队员因该为老人让坐\r\n少 先  队 员 因 该 为 老人让坐\r\n机七学习是人工智能领遇最能体现智能的一个分知\r\n到以深切的问候',style="margin: 0px; width: 310px; height: 187px;"),
     # form.Textbox("bax",
     #     form.notnull,
     #     form.regexp('\d+', 'Must be a digit'),
     #     form.Validator('Must be more than 5', lambda x:int(x)>5)),
-    form.Textarea('output_sentences'),
+    form.Textarea(name='output_sentences',style="margin: 0px; width: 310px; height: 187px;"),
     # form.Checkbox('curly'),
     # form.Dropdown('french', ['mustard', 'fries', 'wine'])
     )
@@ -53,20 +57,10 @@ class index:
 
             rtform = form.Form(
                 # form.Textbox(input_id="foo", name="input_text", value='这是一个测试。'),
-                form.Textarea(name='input_sentences',value=inputform.d.input_sentences),
-                form.Textarea(name='output_sentences',value='\r\n'.join(r_cents))
+                form.Textarea(name='input_sentences',value=inputform.d.input_sentences,style="margin: 0px; width: 310px; height: 187px;"),
+                form.Textarea(name='output_sentences',value='\r\n'.join(r_cents),style="margin: 0px; width: 310px; height: 187px;")
                 )
-
             return render.formtest(rtform()) # open(r'./templates/1.html').read() #"Grrreat success! boe: %s, bax: %s" % (form.d.input_text, form.get('input_text').value)
-
-
-error_sentences = [
-    '疝気医院那好 为老人让坐，疝気专科百科问答',
-    '少先队员因该为老人让坐',
-    '少 先  队 员 因 该 为 老人让坐',
-    '机七学习是人工智能领遇最能体现智能的一个分知',
-    '到以深切的问候',
-]
 
 
 if __name__=="__main__":
