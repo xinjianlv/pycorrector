@@ -3,6 +3,7 @@ import logging
 from argparse import ArgumentParser
 from datetime import datetime
 import pdb
+import pickle
 import torch
 from torch import nn
 from torch import optim
@@ -48,11 +49,21 @@ def train():
     logger.info(args)
     device = torch.device(args.device)
     tokenizer = BertTokenizer.from_pretrained(args.base_model)
-    train_data_loader, valid_data_loader = BertTool.get_loaders(args.dataset_path,tokenizer,args.batch_size)
+
+    cache_train = os.path.join(args.dataset_cache,'tran_data_loader.pkl')
+    cache_valid = os.path.join(args.dataset_cache,'valid_data_loader.pkl')
+
+    if os.path.exists(cache_train) and os.path.exists(cache_valid):
+        logger.info('load data loader form path: %s'% args.dataset_cache)
+        train_data_loader = pickle.load(open(cache_train,'r'))
+        valid_data_loader = pickle.load(open(cache_valid,'r'))
+    else:
+        logger.info('load data loader form resource file %s' % args.dataset_path)
+        train_data_loader, valid_data_loader = BertTool.get_loaders(args.dataset_path,tokenizer,args.batch_size)
+        pickle.dump(train_data_loader,open(cache_train,'w'))
+        pickle.dump(valid_data_loader.open(cache_valid,'w'))
 
     model = BertClassificationModel(cls=tokenizer.vocab_size,model_file=args.base_model)
-
-
 
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
     criterion = nn.CrossEntropyLoss(ignore_index=0)

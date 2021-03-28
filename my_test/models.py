@@ -1,11 +1,14 @@
+import logging
 from torch import nn
 from transformers import BertModel,BertConfig
 
+logger = logging.getLogger()
 
 class BertClassificationModel(nn.Module):
-    def __init__(self, cls, model_file='~/model_files/'):
+    def __init__(self, cls, model_file):
         super(BertClassificationModel, self).__init__()
         self.bert = BertModel.from_pretrained(model_file)
+        logger.info('load model from path:%s'%model_file)
         self.dense = nn.Linear(768, cls)
         # self.softmax = nn.Softmax(dim=-1)
 
