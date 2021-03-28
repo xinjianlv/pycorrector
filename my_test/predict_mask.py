@@ -4,25 +4,23 @@
 @description: Run BERT on Masked LM.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import argparse
 import sys
 
 sys.path.append('../..')
-from pycorrector.transformers import pipeline
-from pycorrector import config
+from transformers import pipeline
+
 
 MASK_TOKEN = "[MASK]"
 
-
+base_dir = './model_files/bert/'
+# base_dir2 = '~/.pycorrector/datasets/bert_models/chinese_finetuned_lm/'
 def main():
     parser = argparse.ArgumentParser()
-    print(config.bert_model_dir)
+
     # Required parameters
-    parser.add_argument("--bert_model_dir", default=config.bert_model_dir,
+    parser.add_argument("--bert_model_dir", default='bert-base-chinese',
                         type=str,
                         help="Bert pre-trained model dir")
     args = parser.parse_args()
@@ -30,7 +28,7 @@ def main():
     nlp = pipeline('fill-mask',
                    model=args.bert_model_dir,
                    tokenizer=args.bert_model_dir
-                   # device=0,  # gpu device id
+                   # device=0  # gpu device id
                    )
     i = nlp('hi lili, What is the name of the [MASK] ?')
     print(i)

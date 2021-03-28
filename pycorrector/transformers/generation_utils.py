@@ -327,7 +327,7 @@ class GenerationMixin:
         **model_kwargs
     ) -> torch.LongTensor:
         r"""
-        Generates sequences for models with a language modeling head. The method currently supports greedy decoding,
+        Generates sequences for model_files with a language modeling head. The method currently supports greedy decoding,
         multinomial sampling, beam-search decoding, and beam-search multinomial sampling.
 
         Apart from :obj:`input_ids` and :obj:`attention_mask`, all the arguments below will default to the value of the
@@ -691,7 +691,7 @@ class GenerationMixin:
         **model_kwargs
     ):
         r"""
-        Generates sequences for models with a language modeling head using greedy decoding.
+        Generates sequences for model_files with a language modeling head using greedy decoding.
 
         Parameters:
 
@@ -809,7 +809,7 @@ class GenerationMixin:
         **model_kwargs
     ):
         r"""
-        Generates sequences for models with a language modeling head using multinomial sampling.
+        Generates sequences for model_files with a language modeling head using multinomial sampling.
 
         Parameters:
 
@@ -940,7 +940,7 @@ class GenerationMixin:
         **model_kwargs
     ):
         r"""
-        Generates sequences for models with a language modeling head using beam search decoding.
+        Generates sequences for model_files with a language modeling head using beam search decoding.
 
         Parameters:
 
@@ -1105,7 +1105,7 @@ class GenerationMixin:
         **model_kwargs
     ):
         r"""
-        Generates sequences for models with a language modeling head using beam search with multinomial sampling.
+        Generates sequences for model_files with a language modeling head using beam search with multinomial sampling.
 
         Parameters:
 
@@ -1281,7 +1281,7 @@ class GenerationMixin:
         **model_kwargs
     ):
         r"""
-        Generates sequences for models with a language modeling head using beam search decoding.
+        Generates sequences for model_files with a language modeling head using beam search decoding.
 
         Parameters:
 

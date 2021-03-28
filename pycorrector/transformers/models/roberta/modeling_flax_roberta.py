@@ -52,7 +52,7 @@ ROBERTA_START_DOCSTRING = r"""
 
     This model inherits from :class:`~transformers.FlaxPreTrainedModel`. Check the superclass documentation for the
     generic methods the library implements for all its model (such as downloading, saving and converting weights from
-    PyTorch models)
+    PyTorch model_files)
 
     This model is also a Flax Linen `flax.nn.Module
     <https://flax.readthedocs.io/en/latest/_autosummary/flax.nn.module.html>`__ subclass. Use it as a regular Flax
@@ -105,7 +105,7 @@ ROBERTA_INPUTS_DOCSTRING = r"""
 """
 
 
-# Copied from transformers.models.bert.modeling_flax_bert.FlaxBertLayerNorm with Bert->Roberta
+# Copied from transformers.model_files.bert.modeling_flax_bert.FlaxBertLayerNorm with Bert->Roberta
 class FlaxRobertaLayerNorm(nn.Module):
     """
     Layer normalization (https://arxiv.org/abs/1607.06450). Operates on the last axis of the input data.
@@ -148,7 +148,7 @@ class FlaxRobertaLayerNorm(nn.Module):
         return y
 
 
-# Copied from transformers.models.bert.modeling_flax_bert.FlaxBertEmbedding with Bert->Roberta
+# Copied from transformers.model_files.bert.modeling_flax_bert.FlaxBertEmbedding with Bert->Roberta
 class FlaxRobertaEmbedding(nn.Module):
     """
     Specify a new class for doing the embedding stuff as Flax's one use 'embedding' for the parameter name and PyTorch
@@ -167,7 +167,7 @@ class FlaxRobertaEmbedding(nn.Module):
         return jnp.take(embedding, inputs, axis=0)
 
 
-# Copied from transformers.models.bert.modeling_flax_bert.FlaxBertEmbeddings with Bert->Roberta
+# Copied from transformers.model_files.bert.modeling_flax_bert.FlaxBertEmbeddings with Bert->Roberta
 class FlaxRobertaEmbeddings(nn.Module):
     """Construct the embeddings from word, position and token_type embeddings."""
 
@@ -214,7 +214,7 @@ class FlaxRobertaEmbeddings(nn.Module):
         return embeddings
 
 
-# Copied from transformers.models.bert.modeling_flax_bert.FlaxBertAttention with Bert->Roberta
+# Copied from transformers.model_files.bert.modeling_flax_bert.FlaxBertAttention with Bert->Roberta
 class FlaxRobertaAttention(nn.Module):
     num_heads: int
     head_size: int
@@ -243,7 +243,7 @@ class FlaxRobertaAttention(nn.Module):
         return layer_norm
 
 
-# Copied from transformers.models.bert.modeling_flax_bert.FlaxBertIntermediate with Bert->Roberta
+# Copied from transformers.model_files.bert.modeling_flax_bert.FlaxBertIntermediate with Bert->Roberta
 class FlaxRobertaIntermediate(nn.Module):
     output_size: int
     hidden_act: str = "gelu"
@@ -262,7 +262,7 @@ class FlaxRobertaIntermediate(nn.Module):
         return hidden_states
 
 
-# Copied from transformers.models.bert.modeling_flax_bert.FlaxBertOutput with Bert->Roberta
+# Copied from transformers.model_files.bert.modeling_flax_bert.FlaxBertOutput with Bert->Roberta
 class FlaxRobertaOutput(nn.Module):
     dropout_rate: float = 0.0
     kernel_init_scale: float = 0.2
@@ -314,7 +314,7 @@ class FlaxRobertaLayer(nn.Module):
         return output
 
 
-# Copied from transformers.models.bert.modeling_flax_bert.FlaxBertLayerCollection with Bert->Roberta
+# Copied from transformers.model_files.bert.modeling_flax_bert.FlaxBertLayerCollection with Bert->Roberta
 class FlaxRobertaLayerCollection(nn.Module):
     """
     Stores N RobertaLayer(s)
@@ -352,7 +352,7 @@ class FlaxRobertaLayerCollection(nn.Module):
         return input_i
 
 
-# Copied from transformers.models.bert.modeling_flax_bert.FlaxBertEncoder with Bert->Roberta
+# Copied from transformers.model_files.bert.modeling_flax_bert.FlaxBertEncoder with Bert->Roberta
 class FlaxRobertaEncoder(nn.Module):
     num_layers: int
     num_heads: int
@@ -379,7 +379,7 @@ class FlaxRobertaEncoder(nn.Module):
         return layer
 
 
-# Copied from transformers.models.bert.modeling_flax_bert.FlaxBertPooler with Bert->Roberta
+# Copied from transformers.model_files.bert.modeling_flax_bert.FlaxBertPooler with Bert->Roberta
 class FlaxRobertaPooler(nn.Module):
     kernel_init_scale: float = 0.2
     dtype: jnp.dtype = jnp.float32  # the dtype of the computation
@@ -399,7 +399,7 @@ class FlaxRobertaPooler(nn.Module):
 class FlaxRobertaPreTrainedModel(FlaxPreTrainedModel):
     """
     An abstract class to handle weights initialization and a simple interface for downloading and loading pretrained
-    models.
+    model_files.
     """
 
     config_class = RobertaConfig
@@ -565,7 +565,7 @@ class FlaxRobertaModel(FlaxRobertaPreTrainedModel):
         )
 
 
-# Copied from transformers.models.bert.modeling_flax_bert.FlaxBertModule with Bert->Roberta
+# Copied from transformers.model_files.bert.modeling_flax_bert.FlaxBertModule with Bert->Roberta
 class FlaxRobertaModule(nn.Module):
     vocab_size: int
     hidden_size: int

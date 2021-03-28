@@ -294,7 +294,7 @@ AUTO_MODEL_PRETRAINED_DOCSTRING = r"""
                 Whether or not to only look at local files (e.g., not try downloading the model).
             revision(:obj:`str`, `optional`, defaults to :obj:`"main"`):
                 The specific model version to use. It can be a branch name, a tag name, or a commit id, since we use a
-                git-based system for storing models and other artifacts on huggingface.co, so ``revision`` can be any
+                git-based system for storing model_files and other artifacts on huggingface.co, so ``revision`` can be any
                 identifier allowed by git.
             kwargs (additional keyword arguments, `optional`):
                 Can be used to update the configuration object (after it being loaded) and initiate the model (e.g.,
@@ -509,9 +509,9 @@ class AutoModelWithLMHead:
     .. warning::
 
         This class is deprecated and will be removed in a future version. Please use
-        :class:`~transformers.AutoModelForCausalLM` for causal language models,
-        :class:`~transformers.AutoModelForMaskedLM` for masked language models and
-        :class:`~transformers.AutoModelForSeq2SeqLM` for encoder-decoder models.
+        :class:`~transformers.AutoModelForCausalLM` for causal language model_files,
+        :class:`~transformers.AutoModelForMaskedLM` for masked language model_files and
+        :class:`~transformers.AutoModelForSeq2SeqLM` for encoder-decoder model_files.
     """
 
     def __init__(self):
@@ -547,8 +547,8 @@ class AutoModelWithLMHead:
         """
         warnings.warn(
             "The class `AutoModelWithLMHead` is deprecated and will be removed in a future version. Please use "
-            "`AutoModelForCausalLM` for causal language models, `AutoModelForMaskedLM` for masked language models and "
-            "`AutoModelForSeq2SeqLM` for encoder-decoder models.",
+            "`AutoModelForCausalLM` for causal language model_files, `AutoModelForMaskedLM` for masked language model_files and "
+            "`AutoModelForSeq2SeqLM` for encoder-decoder model_files.",
             FutureWarning,
         )
         if type(config) in MODEL_WITH_LM_HEAD_MAPPING.keys():
@@ -587,8 +587,8 @@ class AutoModelWithLMHead:
         """
         warnings.warn(
             "The class `AutoModelWithLMHead` is deprecated and will be removed in a future version. Please use "
-            "`AutoModelForCausalLM` for causal language models, `AutoModelForMaskedLM` for masked language models and "
-            "`AutoModelForSeq2SeqLM` for encoder-decoder models.",
+            "`AutoModelForCausalLM` for causal language model_files, `AutoModelForMaskedLM` for masked language model_files and "
+            "`AutoModelForSeq2SeqLM` for encoder-decoder model_files.",
             FutureWarning,
         )
         config = kwargs.pop("config", None)

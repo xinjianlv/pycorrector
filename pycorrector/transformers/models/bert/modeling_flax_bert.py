@@ -36,7 +36,7 @@ BERT_START_DOCSTRING = r"""
 
     This model inherits from :class:`~transformers.FlaxPreTrainedModel`. Check the superclass documentation for the
     generic methods the library implements for all its model (such as downloading, saving and converting weights from
-    PyTorch models)
+    PyTorch model_files)
 
     This model is also a Flax Linen `flax.nn.Module
     <https://flax.readthedocs.io/en/latest/_autosummary/flax.nn.module.html>`__ subclass. Use it as a regular Flax
@@ -417,7 +417,7 @@ class FlaxBertOnlyMLMHead(nn.Module):
 class FlaxBertPreTrainedModel(FlaxPreTrainedModel):
     """
     An abstract class to handle weights initialization and a simple interface for downloading and loading pretrained
-    models.
+    model_files.
     """
 
     config_class = BertConfig
@@ -503,7 +503,7 @@ class FlaxBertPreTrainedModel(FlaxPreTrainedModel):
             if "pooler.dense.kernel" in key:
                 jax_state[key] = tensor.T
 
-            # Hack to correctly load some pytorch models
+            # Hack to correctly load some pytorch model_files
             if "predictions.bias" in key:
                 del jax_state[key]
                 jax_state[".".join(key.split(".")[:2]) + ".decoder.bias"] = tensor

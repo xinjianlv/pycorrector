@@ -56,7 +56,7 @@ BART_PRETRAINED_MODEL_ARCHIVE_LIST = [
     "facebook/bart-large-xsum",
     "facebook/mbart-large-en-ro",
 ]
-# This list is incomplete. See all BART models at https://huggingface.co/models?filter=bart
+# This list is incomplete. See all BART model_files at https://huggingface.co/models?filter=bart
 
 
 def shift_tokens_right(input_ids: torch.Tensor, pad_token_id: int):
@@ -125,7 +125,7 @@ class BartLearnedPositionalEmbedding(nn.Embedding):
 
     def __init__(self, num_embeddings: int, embedding_dim: int, padding_idx: int, offset: int):
         # Bart is set up so that if padding_idx is specified then offset the embedding ids by 2
-        # and adjust num_embeddings appropriately. Other models dont have this hack
+        # and adjust num_embeddings appropriately. Other model_files dont have this hack
         self.offset = offset
         assert padding_idx is not None, "`padding_idx` should not be None, but of type int"
         num_embeddings += offset
@@ -912,7 +912,7 @@ class BartDecoder(BartPretrainedModel):
         # create decoder_padding_mask if not provided and needed
         # 4.12.20 (PVP): Not a fan of this "magical" function that
         # automatically creates attention_mask for padded tokens
-        # => this is inconsistent with other models
+        # => this is inconsistent with other model_files
         # => Pegasus uses the pad_token as decoder_start_token_id, so that this could
         # pose some problems.
         if (

@@ -29,7 +29,7 @@ from .file_utils import requires_protobuf, requires_sentencepiece
 
 class SentencePieceExtractor:
     """
-    Extractor implementation for SentencePiece trained models. https://github.com/google/sentencepiece
+    Extractor implementation for SentencePiece trained model_files. https://github.com/google/sentencepiece
     """
 
     def __init__(self, model: str):

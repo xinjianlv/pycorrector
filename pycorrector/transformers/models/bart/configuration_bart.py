@@ -107,7 +107,7 @@ class BartConfig(PretrainedConfig):
             Whether or not to force BOS token to be generated at step 1 (after ``decoder_start_token_id``), only
             :obj:`True` for `bart-large-cnn`.
         use_cache (:obj:`bool`, `optional`, defaults to :obj:`True`):
-            Whether or not the model should return the last key/values attentions (not used by all models).
+            Whether or not the model should return the last key/values attentions (not used by all model_files).
     """
     model_type = "bart"
     keys_to_ignore_at_inference = ["past_key_values"]
@@ -203,7 +203,7 @@ class BartConfig(PretrainedConfig):
 
         # pos embedding offset
         self.extra_pos_embeddings = extra_pos_embeddings
-        # bart has a hack that offsets positional embeddings by 2, other models don't do this
+        # bart has a hack that offsets positional embeddings by 2, other model_files don't do this
 
         self.force_bos_token_to_be_generated = force_bos_token_to_be_generated
 

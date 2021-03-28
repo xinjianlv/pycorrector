@@ -167,7 +167,7 @@ class BertGenerationEmbeddings(nn.Module):
 class BertGenerationPreTrainedModel(PreTrainedModel):
     """
     An abstract class to handle weights initialization and a simple interface for downloading and loading pretrained
-    models.
+    model_files.
     """
 
     config_class = BertGenerationConfig

@@ -190,7 +190,7 @@ class AutoConfig:
                 'http://hostname': 'foo.bar:4012'}`. The proxies are used on each request.
             revision(:obj:`str`, `optional`, defaults to :obj:`"main"`):
                 The specific model version to use. It can be a branch name, a tag name, or a commit id, since we use a
-                git-based system for storing models and other artifacts on huggingface.co, so ``revision`` can be any
+                git-based system for storing model_files and other artifacts on huggingface.co, so ``revision`` can be any
                 identifier allowed by git.
             return_unused_kwargs (:obj:`bool`, `optional`, defaults to :obj:`False`):
                 If :obj:`False`, then this function returns just the final configuration object.

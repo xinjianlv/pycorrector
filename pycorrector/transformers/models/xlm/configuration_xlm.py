@@ -60,16 +60,16 @@ class XLMConfig(PretrainedConfig):
         sinusoidal_embeddings (:obj:`bool`, `optional`, defaults to :obj:`False`):
             Whether or not to use sinusoidal positional embeddings instead of absolute positional embeddings.
         causal (:obj:`bool`, `optional`, defaults to :obj:`False`):
-            Whether or not the model should behave in a causal manner. Causal models use a triangular attention mask in
+            Whether or not the model should behave in a causal manner. Causal model_files use a triangular attention mask in
             order to only attend to the left-side context instead if a bidirectional context.
         asm (:obj:`bool`, `optional`, defaults to :obj:`False`):
             Whether or not to use an adaptive log softmax projection layer instead of a linear layer for the prediction
             layer.
         n_langs (:obj:`int`, `optional`, defaults to 1):
-            The number of languages the model handles. Set to 1 for monolingual models.
+            The number of languages the model handles. Set to 1 for monolingual model_files.
         use_lang_emb (:obj:`bool`, `optional`, defaults to :obj:`True`)
-            Whether to use language embeddings. Some models use additional language embeddings, see `the multilingual
-            models page <http://huggingface.co/transformers/multilingual.html#xlm-language-embeddings>`__ for
+            Whether to use language embeddings. Some model_files use additional language embeddings, see `the multilingual
+            model_files page <http://huggingface.co/transformers/multilingual.html#xlm-language-embeddings>`__ for
             information on how to use them.
         max_position_embeddings (:obj:`int`, `optional`, defaults to 512):
             The maximum sequence length that this model might ever be used with. Typically set this to something large
@@ -94,7 +94,7 @@ class XLMConfig(PretrainedConfig):
         is_encoder(:obj:`bool`, `optional`, defaults to :obj:`True`):
             Whether or not the initialized model should be a transformer encoder or decoder as seen in Vaswani et al.
         summary_type (:obj:`string`, `optional`, defaults to "first"):
-            Argument used when doing sequence summary. Used in the sequence classification and multiple choice models.
+            Argument used when doing sequence summary. Used in the sequence classification and multiple choice model_files.
 
             Has to be one of the following options:
 
@@ -104,19 +104,19 @@ class XLMConfig(PretrainedConfig):
                 - :obj:`"cls_index"`: Supply a Tensor of classification token position (like GPT/GPT-2).
                 - :obj:`"attn"`: Not implemented now, use multi-head attention.
         summary_use_proj (:obj:`bool`, `optional`, defaults to :obj:`True`):
-            Argument used when doing sequence summary. Used in the sequence classification and multiple choice models.
+            Argument used when doing sequence summary. Used in the sequence classification and multiple choice model_files.
 
             Whether or not to add a projection after the vector extraction.
         summary_activation (:obj:`str`, `optional`):
-            Argument used when doing sequence summary. Used in the sequence classification and multiple choice models.
+            Argument used when doing sequence summary. Used in the sequence classification and multiple choice model_files.
 
             Pass :obj:`"tanh"` for a tanh activation to the output, any other value will result in no activation.
         summary_proj_to_labels (:obj:`bool`, `optional`, defaults to :obj:`True`):
-            Used in the sequence classification and multiple choice models.
+            Used in the sequence classification and multiple choice model_files.
 
             Whether the projection outputs should have :obj:`config.num_labels` or :obj:`config.hidden_size` classes.
         summary_first_dropout (:obj:`float`, `optional`, defaults to 0.1):
-            Used in the sequence classification and multiple choice models.
+            Used in the sequence classification and multiple choice model_files.
 
             The dropout ratio to be used after the projection and activation.
         start_n_top (:obj:`int`, `optional`, defaults to 5):

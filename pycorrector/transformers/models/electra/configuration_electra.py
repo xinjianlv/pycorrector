@@ -74,7 +74,7 @@ class ElectraConfig(PretrainedConfig):
         layer_norm_eps (:obj:`float`, `optional`, defaults to 1e-12):
             The epsilon used by the layer normalization layers.
         summary_type (:obj:`str`, `optional`, defaults to :obj:`"first"`):
-            Argument used when doing sequence summary. Used in the sequence classification and multiple choice models.
+            Argument used when doing sequence summary. Used in the sequence classification and multiple choice model_files.
 
             Has to be one of the following options:
 
@@ -84,15 +84,15 @@ class ElectraConfig(PretrainedConfig):
                 - :obj:`"cls_index"`: Supply a Tensor of classification token position (like GPT/GPT-2).
                 - :obj:`"attn"`: Not implemented now, use multi-head attention.
         summary_use_proj (:obj:`bool`, `optional`, defaults to :obj:`True`):
-            Argument used when doing sequence summary. Used in the sequence classification and multiple choice models.
+            Argument used when doing sequence summary. Used in the sequence classification and multiple choice model_files.
 
             Whether or not to add a projection after the vector extraction.
         summary_activation (:obj:`str`, `optional`):
-            Argument used when doing sequence summary. Used in the sequence classification and multiple choice models.
+            Argument used when doing sequence summary. Used in the sequence classification and multiple choice model_files.
 
             Pass :obj:`"gelu"` for a gelu activation to the output, any other value will result in no activation.
         summary_last_dropout (:obj:`float`, `optional`, defaults to 0.0):
-            Argument used when doing sequence summary. Used in the sequence classification and multiple choice models.
+            Argument used when doing sequence summary. Used in the sequence classification and multiple choice model_files.
 
             The dropout ratio to be used after the projection and activation.
         position_embedding_type (:obj:`str`, `optional`, defaults to :obj:`"absolute"`):

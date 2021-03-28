@@ -43,10 +43,10 @@ ACT2FN = {
 
 class FlaxPreTrainedModel(ABC):
     r"""
-    Base class for all models.
+    Base class for all model_files.
 
-    :class:`~transformers.FlaxPreTrainedModel` takes care of storing the configuration of the models and handles
-    methods for loading, downloading and saving models.
+    :class:`~transformers.FlaxPreTrainedModel` takes care of storing the configuration of the model_files and handles
+    methods for loading, downloading and saving model_files.
 
     Class attributes (overridden by derived classes):
 
@@ -189,7 +189,7 @@ class FlaxPreTrainedModel(ABC):
                 Whether or not to only look at local files (i.e., do not try to download the model).
             revision(:obj:`str`, `optional`, defaults to :obj:`"main"`):
                 The specific model version to use. It can be a branch name, a tag name, or a commit id, since we use a
-                git-based system for storing models and other artifacts on huggingface.co, so ``revision`` can be any
+                git-based system for storing model_files and other artifacts on huggingface.co, so ``revision`` can be any
                 identifier allowed by git.
             kwargs (remaining dictionary of keyword arguments, `optional`):
                 Can be used to update the configuration object (after it being loaded) and initiate the model (e.g.,
@@ -288,7 +288,7 @@ class FlaxPreTrainedModel(ABC):
                 logger.error(err)
                 msg = (
                     f"Can't load weights for '{pretrained_model_name_or_path}'. Make sure that:\n\n"
-                    f"- '{pretrained_model_name_or_path}' is a correct model identifier listed on 'https://huggingface.co/models'\n\n"
+                    f"- '{pretrained_model_name_or_path}' is a correct model identifier listed on 'https://huggingface.co/model_files'\n\n"
                     f"- or '{pretrained_model_name_or_path}' is the correct path to a directory containing a file named {WEIGHTS_NAME}.\n\n"
                 )
                 raise EnvironmentError(msg)
@@ -316,7 +316,7 @@ class FlaxPreTrainedModel(ABC):
                     f"Unable to convert pytorch model {archive_file} to Flax deserializable object. "
                 )
 
-        # init random models
+        # init random model_files
         model = cls(config, *model_args, **model_kwargs)
 
         # if model is base model only use model_prefix key

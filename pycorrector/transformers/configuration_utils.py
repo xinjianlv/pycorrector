@@ -27,7 +27,7 @@ from pycorrector.utils.logger import logger
 
 class PretrainedConfig(object):
     r"""
-    Base class for all configuration classes. Handles a few parameters common to all models' configurations as well as
+    Base class for all configuration classes. Handles a few parameters common to all model_files' configurations as well as
     methods for loading/downloading/saving configurations.
 
     Note: A configuration file can be loaded and saved to disk. Loading the configuration file and using this file to
@@ -60,9 +60,9 @@ class PretrainedConfig(object):
         is_decoder (:obj:`bool`, `optional`, defaults to :obj:`False`):
             Whether the model is used as decoder or not (in which case it's used as an encoder).
         add_cross_attention (:obj:`bool`, `optional`, defaults to :obj:`False`):
-            Whether cross-attention layers should be added to the model. Note, this option is only relevant for models
-            that can be used as decoder models within the `:class:~transformers.EncoderDecoderModel` class, which
-            consists of all models in ``AUTO_MODELS_FOR_CAUSAL_LM``.
+            Whether cross-attention layers should be added to the model. Note, this option is only relevant for model_files
+            that can be used as decoder model_files within the `:class:~transformers.EncoderDecoderModel` class, which
+            consists of all model_files in ``AUTO_MODELS_FOR_CAUSAL_LM``.
         tie_encoder_decoder (:obj:`bool`, `optional`, defaults to :obj:`False`)
             Whether all encoder weights should be tied to their equivalent decoder weights. This requires the encoder
             and decoder model to have the exact same parameter names.
@@ -159,7 +159,7 @@ class PretrainedConfig(object):
     TensorFlow specific parameters
 
         - **use_bfloat16** (:obj:`bool`, `optional`, defaults to :obj:`False`) -- Whether or not the model should use
-          BFloat16 scalars (only used by some TensorFlow models).
+          BFloat16 scalars (only used by some TensorFlow model_files).
     """
     model_type: str = ""
     is_composition: bool = False
@@ -169,14 +169,14 @@ class PretrainedConfig(object):
         self.return_dict = kwargs.pop("return_dict", True)
         self.output_hidden_states = kwargs.pop("output_hidden_states", False)
         self.output_attentions = kwargs.pop("output_attentions", False)
-        self.torchscript = kwargs.pop("torchscript", False)  # Only used by PyTorch models
+        self.torchscript = kwargs.pop("torchscript", False)  # Only used by PyTorch model_files
         self.use_bfloat16 = kwargs.pop("use_bfloat16", False)
         self.pruned_heads = kwargs.pop("pruned_heads", {})
         self.tie_word_embeddings = kwargs.pop(
             "tie_word_embeddings", True
-        )  # Whether input and output word embeddings should be tied for all MLM, LM and Seq2Seq models.
+        )  # Whether input and output word embeddings should be tied for all MLM, LM and Seq2Seq model_files.
 
-        # Is decoder is used in encoder-decoder models to differentiate encoder from decoder
+        # Is decoder is used in encoder-decoder model_files to differentiate encoder from decoder
         self.is_encoder_decoder = kwargs.pop("is_encoder_decoder", False)
         self.is_decoder = kwargs.pop("is_decoder", False)
         self.add_cross_attention = kwargs.pop("add_cross_attention", False)
@@ -212,7 +212,7 @@ class PretrainedConfig(object):
         else:
             self.num_labels = kwargs.pop("num_labels", 2)
 
-        # Tokenizer arguments TODO: eventually tokenizer and models should share the same config
+        # Tokenizer arguments TODO: eventually tokenizer and model_files should share the same config
         self.tokenizer_class = kwargs.pop("tokenizer_class", None)
         self.prefix = kwargs.pop("prefix", None)
         self.bos_token_id = kwargs.pop("bos_token_id", None)
@@ -258,7 +258,7 @@ class PretrainedConfig(object):
     @property
     def num_labels(self) -> int:
         """
-        :obj:`int`: The number of labels for classification models.
+        :obj:`int`: The number of labels for classification model_files.
         """
         return len(self.id2label)
 
@@ -319,7 +319,7 @@ class PretrainedConfig(object):
                 generated when running :obj:`transformers-cli login` (stored in :obj:`~/.huggingface`).
             revision(:obj:`str`, `optional`, defaults to :obj:`"main"`):
                 The specific model version to use. It can be a branch name, a tag name, or a commit id, since we use a
-                git-based system for storing models and other artifacts on huggingface.co, so ``revision`` can be any
+                git-based system for storing model_files and other artifacts on huggingface.co, so ``revision`` can be any
                 identifier allowed by git.
             return_unused_kwargs (:obj:`bool`, `optional`, defaults to :obj:`False`):
                 If :obj:`False`, then this function returns just the final configuration object.
@@ -409,7 +409,7 @@ class PretrainedConfig(object):
             logger.error(err)
             msg = (
                 f"Can't load config for '{pretrained_model_name_or_path}'. Make sure that:\n\n"
-                f"- '{pretrained_model_name_or_path}' is a correct model identifier listed on 'https://huggingface.co/models'\n\n"
+                f"- '{pretrained_model_name_or_path}' is a correct model identifier listed on 'https://huggingface.co/model_files'\n\n"
                 f"- or '{pretrained_model_name_or_path}' is the correct path to a directory containing a {CONFIG_NAME} file\n\n"
             )
             raise EnvironmentError(msg)

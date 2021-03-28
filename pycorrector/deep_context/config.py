@@ -22,7 +22,7 @@ train_path = os.path.join(output_dir, 'train.txt')
 # Validation data path.
 test_path = os.path.join(output_dir, 'test.txt')
 
-model_dir = os.path.join(output_dir, 'models')
+model_dir = os.path.join(output_dir, 'model_files')
 model_path = os.path.join(model_dir, 'model.pth')
 vocab_path = os.path.join(model_dir, 'vocab.txt')
 

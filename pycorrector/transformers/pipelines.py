@@ -82,7 +82,7 @@ def get_default_model(targeted_task: Dict, framework: Optional[str], task_option
 
     Args:
         targeted_task (:obj:`Dict` ):
-           Dictionary representing the given task, that should contain default models
+           Dictionary representing the given task, that should contain default model_files
 
         framework (:obj:`str`, None)
            "pt", "tf" or None, representing a specific framework if it was specified, or None if we don't know yet.
@@ -103,7 +103,7 @@ def get_default_model(targeted_task: Dict, framework: Optional[str], task_option
     defaults = targeted_task["default"]
     if task_options:
         if task_options not in defaults:
-            raise ValueError("The task does not provide any default models for options {}".format(task_options))
+            raise ValueError("The task does not provide any default model_files for options {}".format(task_options))
         default_models = defaults[task_options]["model"]
     elif "model" in defaults:
         default_models = targeted_task["default"]["model"]
@@ -569,7 +569,7 @@ class Pipeline(_ScikitCompat):
 
         Args:
             supported_models (:obj:`List[str]` or :obj:`dict`):
-                The list of models supported by the pipeline, or a dictionary with model class values.
+                The list of model_files supported by the pipeline, or a dictionary with model class values.
         """
         if not isinstance(supported_models, list):  # Create from a model mapping
             supported_models = [item[1].__name__ for item in supported_models.items()]
@@ -577,7 +577,7 @@ class Pipeline(_ScikitCompat):
             raise PipelineException(
                 self.task,
                 self.model.base_model_prefix,
-                f"The model '{self.model.__class__.__name__}' is not supported for {self.task}. Supported models are {supported_models}",
+                f"The model '{self.model.__class__.__name__}' is not supported for {self.task}. Supported model_files are {supported_models}",
             )
 
     def _parse_and_tokenize(self, inputs, padding=True, add_special_tokens=True, **kwargs):
@@ -634,8 +634,8 @@ class FeatureExtractionPipeline(Pipeline):
     This feature extraction pipeline can currently be loaded from :func:`~transformers.pipeline` using the task
     identifier: :obj:`"feature-extraction"`.
 
-    All models may be used for this pipeline. See a list of all models, including community-contributed models on
-    `huggingface.co/models <https://huggingface.co/models>`__.
+    All model_files may be used for this pipeline. See a list of all model_files, including community-contributed model_files on
+    `huggingface.co/model_files <https://huggingface.co/model_files>`__.
 
     Arguments:
         model (:obj:`~transformers.PreTrainedModel` or :obj:`~transformers.TFPreTrainedModel`):
@@ -716,9 +716,9 @@ class TextClassificationPipeline(Pipeline):
     If multiple classification labels are available (:obj:`model.config.num_labels >= 2`), the pipeline will run a
     softmax over the results. If there is a single label, the pipeline will run a sigmoid over the result.
 
-    The models that this pipeline can use are models that have been fine-tuned on a sequence classification task. See
-    the up-to-date list of available models on `huggingface.co/models
-    <https://huggingface.co/models?filter=text-classification>`__.
+    The model_files that this pipeline can use are model_files that have been fine-tuned on a sequence classification task. See
+    the up-to-date list of available model_files on `huggingface.co/model_files
+    <https://huggingface.co/model_files?filter=text-classification>`__.
     """
 
     def __init__(self, return_all_scores: bool = False, **kwargs):
@@ -810,8 +810,8 @@ class ZeroShotClassificationPipeline(Pipeline):
     This NLI pipeline can currently be loaded from :func:`~transformers.pipeline` using the following task identifier:
     :obj:`"zero-shot-classification"`.
 
-    The models that this pipeline can use are models that have been fine-tuned on an NLI task. See the up-to-date list
-    of available models on `huggingface.co/models <https://huggingface.co/models?search=nli>`__.
+    The model_files that this pipeline can use are model_files that have been fine-tuned on an NLI task. See the up-to-date list
+    of available model_files on `huggingface.co/model_files <https://huggingface.co/model_files?search=nli>`__.
     """
 
     def __init__(self, args_parser=ZeroShotClassificationArgumentHandler(), *args, **kwargs):
@@ -937,9 +937,9 @@ class FillMaskPipeline(Pipeline):
     This mask filling pipeline can currently be loaded from :func:`~transformers.pipeline` using the following task
     identifier: :obj:`"fill-mask"`.
 
-    The models that this pipeline can use are models that have been trained with a masked language modeling objective,
-    which includes the bi-directional models in the library. See the up-to-date list of available models on
-    `huggingface.co/models <https://huggingface.co/models?filter=masked-lm>`__.
+    The model_files that this pipeline can use are model_files that have been trained with a masked language modeling objective,
+    which includes the bi-directional model_files in the library. See the up-to-date list of available model_files on
+    `huggingface.co/model_files <https://huggingface.co/model_files?filter=masked-lm>`__.
 
     .. note::
 
@@ -1116,9 +1116,9 @@ class TokenClassificationPipeline(Pipeline):
     task identifier: :obj:`"ner"` (for predicting the classes of tokens in a sequence: person, organisation, location
     or miscellaneous).
 
-    The models that this pipeline can use are models that have been fine-tuned on a token classification task. See the
-    up-to-date list of available models on `huggingface.co/models
-    <https://huggingface.co/models?filter=token-classification>`__.
+    The model_files that this pipeline can use are model_files that have been fine-tuned on a token classification task. See the
+    up-to-date list of available model_files on `huggingface.co/model_files
+    <https://huggingface.co/model_files?filter=token-classification>`__.
     """
 
     default_input_names = "sequences"
@@ -1390,7 +1390,7 @@ SUPPORTED_TASKS = {
 def check_task(task: str) -> Tuple[Dict, Any]:
     """
     Checks an incoming task string, to validate it's correct and return the default Pipeline and Model classes, and
-    default models if they exist.
+    default model_files if they exist.
 
     Args:
         task (:obj:`str`):
@@ -1494,7 +1494,7 @@ def pipeline(
             is provided.
         revision(:obj:`str`, `optional`, defaults to :obj:`"main"`):
             When passing a task name or a string model identifier: The specific model version to use. It can be a
-            branch name, a tag name, or a commit id, since we use a git-based system for storing models and other
+            branch name, a tag name, or a commit id, since we use a git-based system for storing model_files and other
             artifacts on huggingface.co, so ``revision`` can be any identifier allowed by git.
         use_fast (:obj:`bool`, `optional`, defaults to :obj:`True`):
             Whether or not to use a Fast tokenizer if possible (a :class:`~transformers.PreTrainedTokenizerFast`).

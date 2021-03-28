@@ -42,7 +42,7 @@ max_len = 400
 temperature = 1.0
 
 # Path of the model saved
-save_model_dir = os.path.join(output_dir, 'models')
+save_model_dir = os.path.join(output_dir, 'model_files')
 best_model_path = os.path.join(save_model_dir, 'checkpoint_best.pt')
 
 predict_out_path = os.path.join(output_dir, 'valid.src.predict')

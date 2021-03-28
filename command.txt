@@ -1,0 +1,6 @@
+nohup python main.py --lr 0.00001 --batch_size 8 --log_step 10 --train_precent 0.85 --n_epochs 50 > log.out &
+
+nohup python main.py --lr 0.00002 --batch_size 8 --log_step 10 --train_precent 0.85 --n_epochs 20 --cls 146 > log_222_2323.out &
+
+nohup  python3.6 main.py --dataset_path ./my_test/data/nlpcc2018+hsk --lr 0.0001 --batch_size 8 --log_step 10 --n_epochs 10 > log_0324_1920.out &
+python3.6 main.py --dataset_path ./my_test/data/nlpcc2018+hsk/ --lr 0.0001 --batch_size 8 --log_step 10 --n_epochs 10

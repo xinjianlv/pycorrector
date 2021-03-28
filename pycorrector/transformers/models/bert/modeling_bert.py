@@ -82,7 +82,7 @@ BERT_PRETRAINED_MODEL_ARCHIVE_LIST = [
     "TurkuNLP/bert-base-finnish-cased-v1",
     "TurkuNLP/bert-base-finnish-uncased-v1",
     "wietsedv/bert-base-dutch-cased",
-    # See all BERT models at https://huggingface.co/models?filter=bert
+    # See all BERT model_files at https://huggingface.co/models?filter=bert
 ]
 
 
@@ -683,7 +683,7 @@ class BertPreTrainingHeads(nn.Module):
 class BertPreTrainedModel(PreTrainedModel):
     """
     An abstract class to handle weights initialization and a simple interface for downloading and loading pretrained
-    models.
+    model_files.
     """
 
     config_class = BertConfig

@@ -1,0 +1,33 @@
+/Users/nocml/Applications/anaconda3/envs/wk364/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:469: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/Users/nocml/Applications/anaconda3/envs/wk364/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:470: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/Users/nocml/Applications/anaconda3/envs/wk364/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:471: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/Users/nocml/Applications/anaconda3/envs/wk364/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:472: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/Users/nocml/Applications/anaconda3/envs/wk364/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:473: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/Users/nocml/Applications/anaconda3/envs/wk364/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:476: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+/Users/nocml/Applications/anaconda3/envs/wk364/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: compiletime version 3.5 of module 'tensorflow.python.framework.fast_tensor_util' does not match runtime version 3.6
+  return f(*args, **kwds)
+[2021-03-24 19:26:06,249]-[MainThread]-[main.py:train:26]-INFO:  ****************************************************************
+[2021-03-24 19:26:06,249]-[MainThread]-[main.py:train:27]-INFO:  token:20210324192606
+[2021-03-24 19:26:06,249]-[MainThread]-[main.py:train:28]-INFO:  ****************************************************************
+[2021-03-24 19:26:06,250]-[MainThread]-[main.py:train:47]-INFO:  Namespace(base_model='./my_test/data/nlpcc2018+hsk/', batch_size=8, dataset_cache='./cache/', dataset_path='./my_test/data/nlpcc2018+hsk', device='cpu', gradient_accumulation_steps=1, log_step=10, lr=0.0001, n_epochs=10)
+[2021-03-24 19:26:06,250]-[MainThread]-[tokenization_utils.py:_from_pretrained:929]-INFO:  Model name './my_test/data/nlpcc2018+hsk/' not found in model shortcut name list (bert-base-uncased, bert-large-uncased, bert-base-cased, bert-large-cased, bert-base-multilingual-uncased, bert-base-multilingual-cased, bert-base-chinese, bert-base-german-cased, bert-large-uncased-whole-word-masking, bert-large-cased-whole-word-masking, bert-large-uncased-whole-word-masking-finetuned-squad, bert-large-cased-whole-word-masking-finetuned-squad, bert-base-cased-finetuned-mrpc, bert-base-german-dbmdz-cased, bert-base-german-dbmdz-uncased, bert-base-finnish-cased-v1, bert-base-finnish-uncased-v1, bert-base-dutch-cased). Assuming './my_test/data/nlpcc2018+hsk/' is a path, a model identifier, or url to a directory containing tokenizer files.
+[2021-03-24 19:26:06,250]-[MainThread]-[tokenization_utils.py:_from_pretrained:958]-INFO:  Didn't find file ./my_test/data/nlpcc2018+hsk/vocab.txt. We won't load it.
+[2021-03-24 19:26:06,250]-[MainThread]-[tokenization_utils.py:_from_pretrained:958]-INFO:  Didn't find file ./my_test/data/nlpcc2018+hsk/added_tokens.json. We won't load it.
+[2021-03-24 19:26:06,250]-[MainThread]-[tokenization_utils.py:_from_pretrained:958]-INFO:  Didn't find file ./my_test/data/nlpcc2018+hsk/special_tokens_map.json. We won't load it.
+[2021-03-24 19:26:06,250]-[MainThread]-[tokenization_utils.py:_from_pretrained:958]-INFO:  Didn't find file ./my_test/data/nlpcc2018+hsk/tokenizer_config.json. We won't load it.
+Traceback (most recent call last):
+  File "main.py", line 11, in <module>
+    train()
+  File "/Users/nocml/Documents/workspace/mlamp/pycorrector/my_test/main.py", line 49, in train
+    tokenizer = BertTokenizer.from_pretrained(args.base_model)
+  File "/Users/nocml/Applications/anaconda3/envs/wk364/lib/python3.6/site-packages/transformers/tokenization_utils.py", line 902, in from_pretrained
+    return cls._from_pretrained(*inputs, **kwargs)
+  File "/Users/nocml/Applications/anaconda3/envs/wk364/lib/python3.6/site-packages/transformers/tokenization_utils.py", line 1007, in _from_pretrained
+    list(cls.vocab_files_names.values()),
+OSError: Model name './my_test/data/nlpcc2018+hsk/' was not found in tokenizers model name list (bert-base-uncased, bert-large-uncased, bert-base-cased, bert-large-cased, bert-base-multilingual-uncased, bert-base-multilingual-cased, bert-base-chinese, bert-base-german-cased, bert-large-uncased-whole-word-masking, bert-large-cased-whole-word-masking, bert-large-uncased-whole-word-masking-finetuned-squad, bert-large-cased-whole-word-masking-finetuned-squad, bert-base-cased-finetuned-mrpc, bert-base-german-dbmdz-cased, bert-base-german-dbmdz-uncased, bert-base-finnish-cased-v1, bert-base-finnish-uncased-v1, bert-base-dutch-cased). We assumed './my_test/data/nlpcc2018+hsk/' was a path, a model identifier, or url to a directory containing vocabulary files named ['vocab.txt'] but couldn't find such vocabulary files at this path or url.

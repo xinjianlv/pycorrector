@@ -70,7 +70,7 @@ XLM_PRETRAINED_MODEL_ARCHIVE_LIST = [
     "xlm-clm-ende-1024",
     "xlm-mlm-17-1280",
     "xlm-mlm-100-1280",
-    # See all XLM models at https://huggingface.co/models?filter=xlm
+    # See all XLM model_files at https://huggingface.co/models?filter=xlm
 ]
 
 
@@ -228,7 +228,7 @@ class TransformerFFN(nn.Module):
 class XLMPreTrainedModel(PreTrainedModel):
     """
     An abstract class to handle weights initialization and a simple interface for downloading and loading pretrained
-    models.
+    model_files.
     """
 
     config_class = XLMConfig
@@ -266,7 +266,7 @@ class XLMPreTrainedModel(PreTrainedModel):
 @dataclass
 class XLMForQuestionAnsweringOutput(ModelOutput):
     """
-    Base class for outputs of question answering models using a :obj:`SquadHead`.
+    Base class for outputs of question answering model_files using a :obj:`SquadHead`.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape :obj:`(1,)`, `optional`, returned if both :obj:`start_positions` and :obj:`end_positions` are provided):
@@ -343,7 +343,7 @@ XLM_INPUTS_DOCSTRING = r"""
         langs (:obj:`torch.LongTensor` of shape :obj:`({0})`, `optional`):
             A parallel sequence of tokens to be used to indicate the language of each token in the input. Indices are
             languages ids which can be obtained from the language names by using two conversion mappings provided in
-            the configuration of the model (only provided for multilingual models). More precisely, the `language name
+            the configuration of the model (only provided for multilingual model_files). More precisely, the `language name
             to language id` mapping is in :obj:`model.config.lang2id` (which is a dictionary strring to int) and the
             `language id to language name` mapping is in :obj:`model.config.id2lang` (dictionary int to string).
 
@@ -1229,7 +1229,7 @@ class XLMForMultipleChoice(XLMPreTrainedModel):
 
         if lengths is not None:
             logger.warn(
-                "The `lengths` parameter cannot be used with the XLM multiple choice models. Please use the "
+                "The `lengths` parameter cannot be used with the XLM multiple choice model_files. Please use the "
                 "attention mask instead."
             )
             lengths = None

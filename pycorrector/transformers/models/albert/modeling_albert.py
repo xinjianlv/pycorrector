@@ -63,7 +63,7 @@ ALBERT_PRETRAINED_MODEL_ARCHIVE_LIST = [
     "albert-large-v2",
     "albert-xlarge-v2",
     "albert-xxlarge-v2",
-    # See all ALBERT models at https://huggingface.co/models?filter=albert
+    # See all ALBERT model_files at https://huggingface.co/models?filter=albert
 ]
 
 
@@ -214,7 +214,7 @@ class AlbertEmbeddings(nn.Module):
         self.register_buffer("position_ids", torch.arange(config.max_position_embeddings).expand((1, -1)))
         self.position_embedding_type = getattr(config, "position_embedding_type", "absolute")
 
-    # Copied from transformers.models.bert.modeling_bert.BertEmbeddings.forward
+    # Copied from transformers.model_files.bert.modeling_bert.BertEmbeddings.forward
     def forward(
         self, input_ids=None, token_type_ids=None, position_ids=None, inputs_embeds=None, past_key_values_length=0
     ):
@@ -273,7 +273,7 @@ class AlbertAttention(nn.Module):
             self.max_position_embeddings = config.max_position_embeddings
             self.distance_embedding = nn.Embedding(2 * config.max_position_embeddings - 1, self.attention_head_size)
 
-    # Copied from transformers.models.bert.modeling_bert.BertSelfAttention.transpose_for_scores
+    # Copied from transformers.model_files.bert.modeling_bert.BertSelfAttention.transpose_for_scores
     def transpose_for_scores(self, x):
         new_x_shape = x.size()[:-1] + (self.num_attention_heads, self.attention_head_size)
         x = x.view(*new_x_shape)
@@ -479,7 +479,7 @@ class AlbertTransformer(nn.Module):
 class AlbertPreTrainedModel(PreTrainedModel):
     """
     An abstract class to handle weights initialization and a simple interface for downloading and loading pretrained
-    models.
+    model_files.
     """
 
     config_class = AlbertConfig

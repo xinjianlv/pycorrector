@@ -33,12 +33,12 @@ ENCODER_DECODER_START_DOCSTRING = r"""
     :meth:`~transformers.AutoModelForCausalLM.from_pretrained` function. Cross-attention layers are automatically added
     to the decoder and should be fine-tuned on a downstream generative task, like summarization.
 
-    The effectiveness of initializing sequence-to-sequence models with pretrained checkpoints for sequence generation
+    The effectiveness of initializing sequence-to-sequence model_files with pretrained checkpoints for sequence generation
     tasks was shown in `Leveraging Pre-trained Checkpoints for Sequence Generation Tasks
     <https://arxiv.org/abs/1907.12461>`__ by Sascha Rothe, Shashi Narayan, Aliaksei Severyn. Michael Matena, Yanqi
     Zhou, Wei Li, Peter J. Liu.
 
-    After such an Encoder Decoder model has been trained/fine-tuned, it can be saved/loaded just like any other models
+    After such an Encoder Decoder model has been trained/fine-tuned, it can be saved/loaded just like any other model_files
     (see the examples for more information).
 
     This model inherits from :class:`~transformers.PreTrainedModel`. Check the superclass documentation for the generic
@@ -253,7 +253,7 @@ class EncoderDecoderModel(PreTrainedModel):
         Example::
 
             >>> from transformers import EncoderDecoderModel
-            >>> # initialize a bert2bert from two pretrained BERT models. Note that the cross-attention layers will be randomly initialized
+            >>> # initialize a bert2bert from two pretrained BERT model_files. Note that the cross-attention layers will be randomly initialized
             >>> model = EncoderDecoderModel.from_encoder_decoder_pretrained('bert-base-uncased', 'bert-base-uncased')
             >>> # saving model after fine-tuning
             >>> model.save_pretrained("./bert2bert")

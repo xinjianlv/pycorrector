@@ -378,10 +378,10 @@ class ModuleUtilsMixin:
 
 class PreTrainedModel(nn.Module, ModuleUtilsMixin, GenerationMixin):
     r"""
-    Base class for all models.
+    Base class for all model_files.
 
-    :class:`~transformers.PreTrainedModel` takes care of storing the configuration of the models and handles methods
-    for loading, downloading and saving models as well as a few methods common to all models to:
+    :class:`~transformers.PreTrainedModel` takes care of storing the configuration of the model_files and handles methods
+    for loading, downloading and saving model_files as well as a few methods common to all model_files to:
 
         * resize the input embeddings,
         * prune heads in the self-attention heads.
@@ -475,7 +475,7 @@ class PreTrainedModel(nn.Module, ModuleUtilsMixin, GenerationMixin):
         Returns:
             :obj:`nn.Module`: A torch module mapping hidden states to vocabulary.
         """
-        return None  # Overwrite for models with output embeddings
+        return None  # Overwrite for model_files with output embeddings
 
     def tie_weights(self):
         """
@@ -888,7 +888,7 @@ class PreTrainedModel(nn.Module, ModuleUtilsMixin, GenerationMixin):
                 generated when running :obj:`transformers-cli login` (stored in :obj:`~/.huggingface`).
             revision(:obj:`str`, `optional`, defaults to :obj:`"main"`):
                 The specific model version to use. It can be a branch name, a tag name, or a commit id, since we use a
-                git-based system for storing models and other artifacts on huggingface.co, so ``revision`` can be any
+                git-based system for storing model_files and other artifacts on huggingface.co, so ``revision`` can be any
                 identifier allowed by git.
             mirror(:obj:`str`, `optional`, defaults to :obj:`None`):
                 Mirror source to accelerate downloads in China. If you are from China and have an accessibility
@@ -1010,7 +1010,7 @@ class PreTrainedModel(nn.Module, ModuleUtilsMixin, GenerationMixin):
                 logger.error(err)
                 msg = (
                     f"Can't load weights for '{pretrained_model_name_or_path}'. Make sure that:\n\n"
-                    f"- '{pretrained_model_name_or_path}' is a correct model identifier listed on 'https://huggingface.co/models'\n\n"
+                    f"- '{pretrained_model_name_or_path}' is a correct model identifier listed on 'https://huggingface.co/model_files'\n\n"
                     f"- or '{pretrained_model_name_or_path}' is the correct path to a directory containing a file named one of {WEIGHTS_NAME}, {TF2_WEIGHTS_NAME}, {TF_WEIGHTS_NAME}.\n\n"
                 )
                 raise EnvironmentError(msg)
@@ -1096,7 +1096,7 @@ class PreTrainedModel(nn.Module, ModuleUtilsMixin, GenerationMixin):
                     if child is not None:
                         load(child, prefix + name + ".")
 
-            # Make sure we are able to load base models as well as derived models (with heads)
+            # Make sure we are able to load base model_files as well as derived model_files (with heads)
             start_prefix = ""
             model_to_load = model
             has_prefix_module = any(s.startswith(cls.base_model_prefix) for s in state_dict.keys())
@@ -1114,7 +1114,7 @@ class PreTrainedModel(nn.Module, ModuleUtilsMixin, GenerationMixin):
                 ]
                 missing_keys.extend(head_model_state_dict_without_base_prefix - base_model_state_dict)
 
-            # Some models may have keys that are not in the state by design, removing them before needlessly warning
+            # Some model_files may have keys that are not in the state by design, removing them before needlessly warning
             # the user.
             if cls._keys_to_ignore_on_load_missing is not None:
                 for pat in cls._keys_to_ignore_on_load_missing:
@@ -1373,7 +1373,7 @@ class PoolerAnswerClass(nn.Module):
 @dataclass
 class SquadHeadOutput(ModelOutput):
     """
-    Base class for outputs of question answering models using a :class:`~transformers.modeling_utils.SQuADHead`.
+    Base class for outputs of question answering model_files using a :class:`~transformers.modeling_utils.SQuADHead`.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape :obj:`(1,)`, `optional`, returned if both :obj:`start_positions` and :obj:`end_positions` are provided):

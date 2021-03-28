@@ -104,4 +104,5 @@ ENV/
 .idea
 
 *gz
-my_test
+my_test/data
+my_test/model_files

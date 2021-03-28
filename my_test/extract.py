@@ -60,15 +60,15 @@ class BertTool(object):
 
     @staticmethod
     def get_loaders(dataset_path, tokenizer_model,batch_size):
-        # train_loader = BertTool.get_raw_text_loader(os.path.join(dataset_path,'train.src'),
-        #                                             os.path.join(dataset_path,'train.trg'),
-        #                                             tokenizer_model,
-        #                                             batch_size)
+        train_loader = BertTool.get_raw_text_loader(os.path.join(dataset_path,'train.src'),
+                                                    os.path.join(dataset_path,'train.trg'),
+                                                    tokenizer_model,
+                                                    batch_size)
         valid_loader = BertTool.get_raw_text_loader(os.path.join(dataset_path, 'valid.src'),
                                                     os.path.join(dataset_path, 'valid.trg'),
                                                     tokenizer_model,
                                                     batch_size)
-        return valid_loader, valid_loader
+        return train_loader, valid_loader
 
     @staticmethod
     def get_raw_text_loader(src_file,trg_file,tk_model,batch_size):

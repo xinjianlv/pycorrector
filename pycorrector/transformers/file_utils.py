@@ -213,10 +213,10 @@ if (
         and "TRANSFORMERS_CACHE" not in os.environ
 ):
     logger.warn(
-        "In Transformers v4.0.0, the default path to cache downloaded models changed from "
+        "In Transformers v4.0.0, the default path to cache downloaded model_files changed from "
         "'~/.cache/torch/transformers' to '~/.cache/huggingface/transformers'. Since you don't seem to have overridden "
         "and '~/.cache/torch/transformers' is a directory that exists, we're moving it to "
-        "'~/.cache/huggingface/transformers' to avoid redownloading models you have already in the cache. You should "
+        "'~/.cache/huggingface/transformers' to avoid redownloading model_files you have already in the cache. You should "
         "only see this message once."
     )
     shutil.move(old_default_cache_path, default_cache_path)
@@ -241,13 +241,13 @@ MULTIPLE_CHOICE_DUMMY_INPUTS = [
 DUMMY_INPUTS = [[7, 6, 0, 0, 1], [1, 2, 3, 0, 0], [0, 0, 0, 4, 5]]
 DUMMY_MASK = [[1, 1, 1, 1, 1], [1, 1, 1, 0, 0], [0, 0, 0, 1, 1]]
 
-S3_BUCKET_PREFIX = "https://s3.amazonaws.com/models.huggingface.co/bert"
+S3_BUCKET_PREFIX = "https://s3.amazonaws.com/model_files.huggingface.co/bert"
 CLOUDFRONT_DISTRIB_PREFIX = "https://cdn.huggingface.co"
 HUGGINGFACE_CO_PREFIX = "https://huggingface.co/{model_id}/resolve/{revision}/{filename}"
 
 PRESET_MIRROR_DICT = {
-    "tuna": "https://mirrors.tuna.tsinghua.edu.cn/hugging-face-models",
-    "bfsu": "https://mirrors.bfsu.edu.cn/hugging-face-models",
+    "tuna": "https://mirrors.tuna.tsinghua.edu.cn/hugging-face-model_files",
+    "bfsu": "https://mirrors.bfsu.edu.cn/hugging-face-model_files",
 }
 
 
@@ -1191,7 +1191,7 @@ def get_from_cache(
                 return os.path.join(cache_dir, matching_files[-1])
             else:
                 # If files cannot be found and local_files_only=True,
-                # the models might've been found if local_files_only=False
+                # the model_files might've been found if local_files_only=False
                 # Notify the user about that
                 if local_files_only:
                     raise ValueError(

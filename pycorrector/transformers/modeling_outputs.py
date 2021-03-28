@@ -407,7 +407,7 @@ class CausalLMOutputWithCrossAttentions(ModelOutput):
 @dataclass
 class SequenceClassifierOutputWithPast(ModelOutput):
     """
-    Base class for outputs of sentence classification models.
+    Base class for outputs of sentence classification model_files.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape :obj:`(1,)`, `optional`, returned when :obj:`labels` is provided):
@@ -443,7 +443,7 @@ class SequenceClassifierOutputWithPast(ModelOutput):
 @dataclass
 class MaskedLMOutput(ModelOutput):
     """
-    Base class for masked language models outputs.
+    Base class for masked language model_files outputs.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape :obj:`(1,)`, `optional`, returned when :obj:`labels` is provided):
@@ -472,7 +472,7 @@ class MaskedLMOutput(ModelOutput):
 @dataclass
 class Seq2SeqLMOutput(ModelOutput):
     """
-    Base class for sequence-to-sequence language models outputs.
+    Base class for sequence-to-sequence language model_files outputs.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape :obj:`(1,)`, `optional`, returned when :obj:`labels` is provided):
@@ -531,7 +531,7 @@ class Seq2SeqLMOutput(ModelOutput):
 @dataclass
 class NextSentencePredictorOutput(ModelOutput):
     """
-    Base class for outputs of models predicting if two sentences are consecutive or not.
+    Base class for outputs of model_files predicting if two sentences are consecutive or not.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape :obj:`(1,)`, `optional`, returned when :obj:`next_sentence_label` is provided):
@@ -561,7 +561,7 @@ class NextSentencePredictorOutput(ModelOutput):
 @dataclass
 class SequenceClassifierOutput(ModelOutput):
     """
-    Base class for outputs of sentence classification models.
+    Base class for outputs of sentence classification model_files.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape :obj:`(1,)`, `optional`, returned when :obj:`labels` is provided):
@@ -590,7 +590,7 @@ class SequenceClassifierOutput(ModelOutput):
 @dataclass
 class Seq2SeqSequenceClassifierOutput(ModelOutput):
     """
-    Base class for outputs of sequence-to-sequence sentence classification models.
+    Base class for outputs of sequence-to-sequence sentence classification model_files.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape :obj:`(1,)`, `optional`, returned when :obj:`label` is provided):
@@ -649,7 +649,7 @@ class Seq2SeqSequenceClassifierOutput(ModelOutput):
 @dataclass
 class MultipleChoiceModelOutput(ModelOutput):
     """
-    Base class for outputs of multiple choice models.
+    Base class for outputs of multiple choice model_files.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape `(1,)`, `optional`, returned when :obj:`labels` is provided):
@@ -680,7 +680,7 @@ class MultipleChoiceModelOutput(ModelOutput):
 @dataclass
 class TokenClassifierOutput(ModelOutput):
     """
-    Base class for outputs of token classification models.
+    Base class for outputs of token classification model_files.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape :obj:`(1,)`, `optional`, returned when ``labels`` is provided) :
@@ -709,7 +709,7 @@ class TokenClassifierOutput(ModelOutput):
 @dataclass
 class QuestionAnsweringModelOutput(ModelOutput):
     """
-    Base class for outputs of question answering models.
+    Base class for outputs of question answering model_files.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape :obj:`(1,)`, `optional`, returned when :obj:`labels` is provided):
@@ -741,7 +741,7 @@ class QuestionAnsweringModelOutput(ModelOutput):
 @dataclass
 class Seq2SeqQuestionAnsweringModelOutput(ModelOutput):
     """
-    Base class for outputs of sequence-to-sequence question answering models.
+    Base class for outputs of sequence-to-sequence question answering model_files.
 
     Args:
         loss (:obj:`torch.FloatTensor` of shape :obj:`(1,)`, `optional`, returned when :obj:`labels` is provided):

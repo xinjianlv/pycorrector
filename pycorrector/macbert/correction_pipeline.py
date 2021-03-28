@@ -73,7 +73,7 @@ class CorrectionPipeline(Pipeline):
                 to truncate the input to fit the model's max_length instead of throwing an error down the line.
             generate_kwargs:
                 Additional keyword arguments to pass along to the generate method of the model (see the generate method
-                corresponding to your framework `here <./model.html#generative-models>`__).
+                corresponding to your framework `here <./model.html#generative-model_files>`__).
         Return:
             A list or a list of list of :obj:`dict`: Each result comes as a dictionary with the following keys:
             - **generated_text** (:obj:`str`, present when ``return_text=True``) -- The generated text.

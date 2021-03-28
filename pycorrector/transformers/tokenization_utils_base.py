@@ -882,7 +882,7 @@ class SpecialTokensMixin:
         - You can easily refer to special tokens using tokenizer class attributes like :obj:`tokenizer.cls_token`. This
           makes it easy to develop model-agnostic training and fine-tuning scripts.
 
-        When possible, special tokens are already registered for provided pretrained models (for instance
+        When possible, special tokens are already registered for provided pretrained model_files (for instance
         :class:`~transformers.BertTokenizer` :obj:`cls_token` is already registered to be :obj`'[CLS]'` and XLM's one
         is also registered to be :obj:`'</s>'`).
 
@@ -1398,13 +1398,13 @@ INIT_TOKENIZER_DOCSTRING = r"""
           file (string).
         - **pretrained_vocab_files_map** (:obj:`Dict[str, Dict[str, str]]`) -- A dictionary of dictionaries, with the
           high-level keys being the ``__init__`` keyword name of each vocabulary file required by the model, the
-          low-level being the :obj:`short-cut-names` of the pretrained models with, as associated values, the
+          low-level being the :obj:`short-cut-names` of the pretrained model_files with, as associated values, the
           :obj:`url` to the associated pretrained vocabulary file.
         - **max_model_input_sizes** (:obj:`Dict[str, Optinal[int]]`) -- A dictionary with, as keys, the
-          :obj:`short-cut-names` of the pretrained models, and as associated values, the maximum length of the sequence
+          :obj:`short-cut-names` of the pretrained model_files, and as associated values, the maximum length of the sequence
           inputs of this model, or :obj:`None` if the model has no maximum input size.
         - **pretrained_init_configuration** (:obj:`Dict[str, Dict[str, Any]]`) -- A dictionary with, as keys, the
-          :obj:`short-cut-names` of the pretrained models, and as associated values, a dictionary of specific arguments
+          :obj:`short-cut-names` of the pretrained model_files, and as associated values, a dictionary of specific arguments
           to pass to the ``__init__`` method of the tokenizer class for this pretrained model when loading the
           tokenizer with the :meth:`~transformers.tokenization_utils_base.PreTrainedTokenizerBase.from_pretrained`
           method.
@@ -1652,7 +1652,7 @@ class PreTrainedTokenizerBase(SpecialTokensMixin):
                 generated when running :obj:`transformers-cli login` (stored in :obj:`~/.huggingface`).
             revision(:obj:`str`, `optional`, defaults to :obj:`"main"`):
                 The specific model version to use. It can be a branch name, a tag name, or a commit id, since we use a
-                git-based system for storing models and other artifacts on huggingface.co, so ``revision`` can be any
+                git-based system for storing model_files and other artifacts on huggingface.co, so ``revision`` can be any
                 identifier allowed by git.
             subfolder (:obj:`str`, `optional`):
                 In case the relevant files are located inside a subfolder of the model repo on huggingface.co (e.g. for
@@ -1789,7 +1789,7 @@ class PreTrainedTokenizerBase(SpecialTokensMixin):
         if all(full_file_name is None for full_file_name in resolved_vocab_files.values()):
             msg = (
                 f"Can't load tokenizer for '{pretrained_model_name_or_path}'. Make sure that:\n\n"
-                f"- '{pretrained_model_name_or_path}' is a correct model identifier listed on 'https://huggingface.co/models'\n\n"
+                f"- '{pretrained_model_name_or_path}' is a correct model identifier listed on 'https://huggingface.co/model_files'\n\n"
                 f"- or '{pretrained_model_name_or_path}' is the correct path to a directory containing relevant tokenizer files\n\n"
             )
             raise EnvironmentError(msg)

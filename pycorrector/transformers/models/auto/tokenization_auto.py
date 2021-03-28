@@ -180,7 +180,7 @@ class AutoTokenizer:
                 'http://hostname': 'foo.bar:4012'}`. The proxies are used on each request.
             revision(:obj:`str`, `optional`, defaults to :obj:`"main"`):
                 The specific model version to use. It can be a branch name, a tag name, or a commit id, since we use a
-                git-based system for storing models and other artifacts on huggingface.co, so ``revision`` can be any
+                git-based system for storing model_files and other artifacts on huggingface.co, so ``revision`` can be any
                 identifier allowed by git.
             subfolder (:obj:`str`, `optional`):
                 In case the relevant files are located inside a subfolder of the model repo on huggingface.co (e.g. for

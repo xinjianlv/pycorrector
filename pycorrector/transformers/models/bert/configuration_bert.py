@@ -41,7 +41,7 @@ BERT_PRETRAINED_CONFIG_ARCHIVE_MAP = {
     "TurkuNLP/bert-base-finnish-cased-v1": "https://huggingface.co/TurkuNLP/bert-base-finnish-cased-v1/resolve/main/config.json",
     "TurkuNLP/bert-base-finnish-uncased-v1": "https://huggingface.co/TurkuNLP/bert-base-finnish-uncased-v1/resolve/main/config.json",
     "wietsedv/bert-base-dutch-cased": "https://huggingface.co/wietsedv/bert-base-dutch-cased/resolve/main/config.json",
-    # See all BERT models at https://huggingface.co/models?filter=bert
+    # See all BERT model_files at https://huggingface.co/models?filter=bert
 }
 
 
@@ -96,7 +96,7 @@ class BertConfig(PretrainedConfig):
             `Method 4` in `Improve Transformer Models with Better Relative Position Embeddings (Huang et al.)
             <https://arxiv.org/abs/2009.13658>`__.
         use_cache (:obj:`bool`, `optional`, defaults to :obj:`True`):
-            Whether or not the model should return the last key/values attentions (not used by all models). Only
+            Whether or not the model should return the last key/values attentions (not used by all model_files). Only
             relevant if ``config.is_decoder=True``.
 
     Examples::

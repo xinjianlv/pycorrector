@@ -62,7 +62,7 @@ DISTILBERT_PRETRAINED_MODEL_ARCHIVE_LIST = [
     "distilbert-base-german-cased",
     "distilbert-base-multilingual-cased",
     "distilbert-base-uncased-finetuned-sst-2-english",
-    # See all DistilBERT models at https://huggingface.co/models?filter=distilbert
+    # See all DistilBERT model_files at https://huggingface.co/models?filter=distilbert
 ]
 
 
@@ -330,7 +330,7 @@ class Transformer(nn.Module):
 class DistilBertPreTrainedModel(PreTrainedModel):
     """
     An abstract class to handle weights initialization and a simple interface for downloading and loading pretrained
-    models.
+    model_files.
     """
 
     config_class = DistilBertConfig

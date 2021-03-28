@@ -60,7 +60,7 @@ ELECTRA_PRETRAINED_MODEL_ARCHIVE_LIST = [
     "google/electra-small-discriminator",
     "google/electra-base-discriminator",
     "google/electra-large-discriminator",
-    # See all ELECTRA models at https://huggingface.co/models?filter=electra
+    # See all ELECTRA model_files at https://huggingface.co/models?filter=electra
 ]
 
 
@@ -165,7 +165,7 @@ class ElectraEmbeddings(nn.Module):
         self.register_buffer("position_ids", torch.arange(config.max_position_embeddings).expand((1, -1)))
         self.position_embedding_type = getattr(config, "position_embedding_type", "absolute")
 
-    # Copied from transformers.models.bert.modeling_bert.BertEmbeddings.forward
+    # Copied from transformers.model_files.bert.modeling_bert.BertEmbeddings.forward
     def forward(
         self, input_ids=None, token_type_ids=None, position_ids=None, inputs_embeds=None, past_key_values_length=0
     ):
@@ -195,7 +195,7 @@ class ElectraEmbeddings(nn.Module):
         return embeddings
 
 
-# Copied from transformers.models.bert.modeling_bert.BertSelfAttention with Bert->Electra
+# Copied from transformers.model_files.bert.modeling_bert.BertSelfAttention with Bert->Electra
 class ElectraSelfAttention(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -321,7 +321,7 @@ class ElectraSelfAttention(nn.Module):
         return outputs
 
 
-# Copied from transformers.models.bert.modeling_bert.BertSelfOutput
+# Copied from transformers.model_files.bert.modeling_bert.BertSelfOutput
 class ElectraSelfOutput(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -336,7 +336,7 @@ class ElectraSelfOutput(nn.Module):
         return hidden_states
 
 
-# Copied from transformers.models.bert.modeling_bert.BertAttention with Bert->Electra
+# Copied from transformers.model_files.bert.modeling_bert.BertAttention with Bert->Electra
 class ElectraAttention(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -386,7 +386,7 @@ class ElectraAttention(nn.Module):
         return outputs
 
 
-# Copied from transformers.models.bert.modeling_bert.BertIntermediate
+# Copied from transformers.model_files.bert.modeling_bert.BertIntermediate
 class ElectraIntermediate(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -402,7 +402,7 @@ class ElectraIntermediate(nn.Module):
         return hidden_states
 
 
-# Copied from transformers.models.bert.modeling_bert.BertOutput
+# Copied from transformers.model_files.bert.modeling_bert.BertOutput
 class ElectraOutput(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -417,7 +417,7 @@ class ElectraOutput(nn.Module):
         return hidden_states
 
 
-# Copied from transformers.models.bert.modeling_bert.BertLayer with Bert->Electra
+# Copied from transformers.model_files.bert.modeling_bert.BertLayer with Bert->Electra
 class ElectraLayer(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -501,7 +501,7 @@ class ElectraLayer(nn.Module):
         return layer_output
 
 
-# Copied from transformers.models.bert.modeling_bert.BertEncoder with Bert->Electra
+# Copied from transformers.model_files.bert.modeling_bert.BertEncoder with Bert->Electra
 class ElectraEncoder(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -629,7 +629,7 @@ class ElectraGeneratorPredictions(nn.Module):
 class ElectraPreTrainedModel(PreTrainedModel):
     """
     An abstract class to handle weights initialization and a simple interface for downloading and loading pretrained
-    models.
+    model_files.
     """
 
     config_class = ElectraConfig
@@ -638,7 +638,7 @@ class ElectraPreTrainedModel(PreTrainedModel):
     _keys_to_ignore_on_load_missing = [r"position_ids"]
     _keys_to_ignore_on_load_unexpected = [r"electra\.embeddings_project\.weight", r"electra\.embeddings_project\.bias"]
 
-    # Copied from transformers.models.bert.modeling_bert.BertPreTrainedModel._init_weights
+    # Copied from transformers.model_files.bert.modeling_bert.BertPreTrainedModel._init_weights
     def _init_weights(self, module):
         """ Initialize the weights """
         if isinstance(module, (nn.Linear, nn.Embedding)):

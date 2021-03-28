@@ -23,7 +23,7 @@ test_path = os.path.join(output_dir, 'test.txt')
 # seq2seq_attn_train config
 save_src_vocab_path = os.path.join(output_dir, 'vocab_source.txt')
 save_trg_vocab_path = os.path.join(output_dir, 'vocab_target.txt')
-model_dir = os.path.join(output_dir, 'models')
+model_dir = os.path.join(output_dir, 'model_files')
 
 batch_size = 32
 epochs = 10

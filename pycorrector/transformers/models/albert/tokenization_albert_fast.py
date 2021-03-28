@@ -71,7 +71,7 @@ SPIECE_UNDERLINE = "▁"
 class AlbertTokenizerFast(PreTrainedTokenizerFast):
     """
     Construct a "fast" ALBERT tokenizer (backed by HuggingFace's `tokenizers` library). Based on `Unigram
-    <https://huggingface.co/docs/tokenizers/python/latest/components.html?highlight=unigram#models>`__. This tokenizer
+    <https://huggingface.co/docs/tokenizers/python/latest/components.html?highlight=unigram#model_files>`__. This tokenizer
     inherits from :class:`~transformers.PreTrainedTokenizerFast` which contains most of the main methods. Users should
     refer to this superclass for more information regarding those methods
 
