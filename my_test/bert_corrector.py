@@ -4,6 +4,7 @@
 @description: use bert detect and correct chinese char error
 """
 
+import pdb
 import operator
 import os
 import sys
@@ -100,6 +101,8 @@ class BertCorrector(object):
 
 
 if __name__ == "__main__":
+
+    pdb.set_trace()
     d = BertCorrector()
     error_sentences = [
         '疝気医院那好 为老人让坐，疝気专科百科问答',
@@ -108,6 +111,7 @@ if __name__ == "__main__":
         '机七学习是人工智能领遇最能体现智能的一个分知',
         '今天心情很好',
     ]
+
     for sent in error_sentences:
         corrected_sent, err = d.bert_correct(sent)
         print("original sentence:{} => {}, err:{}".format(sent, corrected_sent, err))

@@ -8,6 +8,7 @@ import torch
 from torch import nn
 from torch import optim
 from torch.nn import DataParallel
+from torch.utils.data import DataLoader, RandomSampler
 from transformers import get_cosine_schedule_with_warmup,BertTokenizer
 
 from ignite.engine import Engine, Events
@@ -15,8 +16,11 @@ from ignite.handlers import ModelCheckpoint
 from ignite.handlers import EarlyStopping
 from ignite.metrics import Accuracy, Loss, MetricsLambda, RunningAverage
 
-from my_test.extract import BertTool
-from my_test.models import BertClassificationModel
+# from my_test.extract import BertTool
+# from my_test.models import BertClassificationModel
+
+from transformers import BertForPreTraining
+from my_test.data_process.data_process import BERTDataset
 
 logger = logging.getLogger()
 
@@ -30,7 +34,7 @@ def train():
     logger.info('*' * 64)
 
     parser = ArgumentParser()
-    parser.add_argument("--dataset_path", type=str, default="./my_test/data/nlpcc2018+hsk/",
+    parser.add_argument("--train_file", type=str, default="./my_test/data/student/part1.txt",
                         help="Path or url of the dataset. If empty download from S3.")
 
     parser.add_argument("--dataset_cache", type=str, default='./cache/', help="Path or url of the dataset cache")
@@ -39,34 +43,36 @@ def train():
                         help="Accumulate gradients on several steps")
     parser.add_argument("--lr", type=float, default=6.25e-4, help="Learning rate")
     # parser.add_argument("--train_precent", type=float, default=0.7, help="Batch size for validation")
-    parser.add_argument("--n_epochs", type=int, default=30, help="Number of training epochs")
+    parser.add_argument("--n_epochs", type=int, default=1, help="Number of training epochs")
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu",
                         help="Device (cuda or cpu)")
     # parser.add_argument("--max_norm", type=float, default=1.0, help="Clipping gradient norm")
     parser.add_argument("--log_step", type=int, default=1, help="Multiple-choice loss coefficient")
-    parser.add_argument("--base_model", type=str, default="./my_test/model_files/bert/" )
+    parser.add_argument("--base_model", type=str, default="bert-base-uncased" )
+    parser.add_argument("--on_memory", action='store_true', help="Whether to load train samples into memory or use disk")
+    parser.add_argument("--max_seq_length",
+                        default=128,
+                        type=int,
+                        help="The maximum total input sequence length after WordPiece tokenization. \n"
+                             "Sequences longer than this will be truncated, and sequences shorter \n"
+                             "than this will be padded.")
+    parser.add_argument("--do_lower_case",
+                        action='store_true',
+                        help="Whether to lower case the input text. True for uncased models, False for cased models.")
+
     args = parser.parse_args()
     logger.info(args)
     device = torch.device(args.device)
     tokenizer = BertTokenizer.from_pretrained(args.base_model)
 
-    cache_train = os.path.join(args.dataset_cache,'tran_data_loader.pkl')
-    cache_valid = os.path.join(args.dataset_cache,'valid_data_loader.pkl')
 
-    if os.path.exists(cache_train) and os.path.exists(cache_valid):
-        logger.info('load data loader form path: %s'% args.dataset_cache)
-        train_data_loader = pickle.load(open(cache_train,'rb'))
-        valid_data_loader = pickle.load(open(cache_valid,'rb'))
-    else:
-        logger.info('load data loader form resource file %s' % args.dataset_path)
-        train_data_loader, valid_data_loader = BertTool.get_loaders(args.dataset_path,tokenizer,args.batch_size)
-        pickle.dump(train_data_loader, open(cache_train, 'wb'), protocol=4)
-        pickle.dump(valid_data_loader, open(cache_valid,'wb'), protocol=4)
+    train_dataset = BERTDataset(args.train_file, tokenizer, seq_len=args.max_seq_length, corpus_lines=None, on_memory=args.on_memory)
+    train_data_loader = DataLoader(train_dataset, batch_size=args.batch_size)
 
-    model = BertClassificationModel(cls=tokenizer.vocab_size,model_file=args.base_model)
+    model = BertForPreTraining.from_pretrained(args.base_model)
 
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
-    criterion = nn.CrossEntropyLoss(ignore_index=0)
+
     steps = len(train_data_loader.dataset) // train_data_loader.batch_size
     steps = steps if steps > 0 else 1
     logger.info('steps:%d' % steps)
@@ -88,58 +94,62 @@ def train():
 
     def update(engine, batch):
         model.train()
-        input_ids = batch[0].to(device)
-        attention_mask = batch[1].to(device)
-        labels = batch[2].to(device)
+        # input_ids, input_mask, segment_ids, lm_label_ids, is_next = batch
+        """
+        input_ids=None,
+        attention_mask=None,
+        token_type_ids=None,
+        position_ids=None,
+        head_mask=None,
+        inputs_embeds=None,
+        masked_lm_labels=None,
+        next_sentence_label=None,
+        """
+        # loss = model(input_ids=batch[0],input_mask=batch[1],segment_ids=batch[2],lm_label_ids=batch[3],is_next=batch[4])
 
-        output = model(input_ids=input_ids, attention_mask=attention_mask)
-        predict = output.permute(1,2,0)
-        trg = labels.permute(1,0)
-        loss = criterion(predict.to(device), trg.to(device))
+        loss = model(input_ids=batch[0],attention_mask=batch[1],position_ids=batch[2],masked_lm_labels=batch[3],next_sentence_label=batch[4])
 
-        loss.backward()
         if engine.state.iteration % args.gradient_accumulation_steps == 0:
             optimizer.step()
             optimizer.zero_grad()
 
         lr_warmup.step()
-
         if multi_gpu:
-            return loss.cpu().mean().item()
+            loss = loss.mean()
+        loss.backward()
+
         return loss.cpu().item()
 
 
     trainer = Engine(update)
 
-    def inference(engine, batch):
-        model.eval()
-        with torch.no_grad():
-            input_ids = batch[0].to(device)
-            attention_mask = batch[1].to(device)
-            labels = batch[2].to(device)
-            output = model(input_ids=input_ids, attention_mask=attention_mask)
+    # def inference(engine, batch):
+    #     model.eval()
+    #     with torch.no_grad():
+    #         input_ids = batch[0].to(device)
+    #         attention_mask = batch[1].to(device)
+    #         labels = batch[2].to(device)
+    #         output = model(input_ids=input_ids, attention_mask=attention_mask)
+    #
+    #         predict = output.permute(1, 2, 0)
+    #         trg = labels.permute(1, 0)
+    #         loss = criterion(predict.to(device), trg.to(device))
+            # return predict, trg
+    #
+    # evaluator = Engine(inference)
+    # metrics = {"nll": Loss(criterion, output_transform=lambda x: (x[0], x[1])),
+    #            "accuracy": Accuracy(output_transform=lambda x: (x[0], x[1]))}
+    # for name, metric in metrics.items():
+    #     metric.attach(evaluator, name)
+    #
+    # @trainer.on(Events.EPOCH_COMPLETED)
+    # def log_validation_results(trainer):
+    #     evaluator.run(valid_data_loader)
+    #     ms = evaluator.state.metrics
+    #     logger.info("Validation Results - Epoch: [{}/{}]  Avg accuracy: {:.6f} Avg loss: {:.6f}"
+    #           .format(trainer.state.epoch, trainer.state.max_epochs, ms['accuracy'], ms['nll']))
 
-            predict = output.permute(1, 2, 0)
-            trg = labels.permute(1, 0)
-            # loss = criterion(predict.to(device), trg.to(device))
-
-            return predict, trg
-
-    evaluator = Engine(inference)
-    metrics = {"nll": Loss(criterion, output_transform=lambda x: (x[0], x[1])),
-               "accuracy": Accuracy(output_transform=lambda x: (x[0], x[1]))}
-    for name, metric in metrics.items():
-        metric.attach(evaluator, name)
-    Loss(criterion, output_transform=lambda x: (x[0], x[1]))
-
-    @trainer.on(Events.EPOCH_COMPLETED)
-    def log_validation_results(trainer):
-        evaluator.run(valid_data_loader)
-        ms = evaluator.state.metrics
-        logger.info("Validation Results - Epoch: [{}/{}]  Avg accuracy: {:.6f} Avg loss: {:.6f}"
-              .format(trainer.state.epoch, trainer.state.max_epochs, ms['accuracy'], ms['nll']))
-
-
+    #
     '''======================early stopping =========================='''
     # def score_function(engine):
     #     val_loss = engine.state.metrics['nll']

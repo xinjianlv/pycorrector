@@ -59,7 +59,7 @@ class BertTool(object):
         return train_data_loader
 
     @staticmethod
-    def get_loaders(dataset_path, tokenizer_model,batch_size):
+    def get_loaders(dataset_path, tokenizer_model, batch_size):
         train_loader = BertTool.get_raw_text_loader(os.path.join(dataset_path,'train.src'),
                                                     os.path.join(dataset_path,'train.trg'),
                                                     tokenizer_model,
